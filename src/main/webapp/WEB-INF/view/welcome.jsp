@@ -9,6 +9,13 @@
 <title>How to Generate Excel using Spring and Apache POI</title>
 </head>
 <body>
+<c:forEach var="student" items="${studentList}" >
+ "${student.getStudentName()}"
+  "${student.getStudentId()}"
+  "${student.getStudentMobileNum()}"
+  <br>
+</c:forEach>
+
  <h1>Download Excel File: </h1>
  <spring:url value="/report" var="xlsURL"></spring:url>
  <a href="${xlsURL}">Excel Document</a>

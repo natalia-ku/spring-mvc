@@ -32,21 +32,30 @@ import org.springframework.web.servlet.view.JstlView;
 public class WelcomeController {
 
 	@RequestMapping("/")
-	  public String welcome(){
-          return "welcome"; 
-   }
+	public ModelAndView welcome(){
+		List<Student> studentList = getList();     
+		return new ModelAndView("welcome", "studentList", studentList);
+
+	}
 
 	@RequestMapping(value = "/report" , method=RequestMethod.GET)
-    public ModelAndView getExcel(){
-           List<Student> studentList = new ArrayList<Student>(); 
-           studentList.add(new Student("S01", "Natalia", "12344"));
-           studentList.add(new Student("S02", "David", "658"));
-           studentList.add(new Student("S01", "Dima", "12344"));
-           studentList.add(new Student("S02", "Igor", "658"));
-           studentList.add(new Student("S01", "Andrey", "12344"));
-           studentList.add(new Student("S02", "Elena", "658"));
-           return new ModelAndView(new ExcelReportView(), "studentList", studentList);
-    }
+	public ModelAndView getExcel(){
+		List<Student> studentList = getList();
+		return new ModelAndView(new ExcelReportView(), "studentList", studentList);
+	}
+
+	private  List<Student> getList(){
+		List<Student> studentList = new ArrayList<Student>(); 
+		studentList.add(new Student("S01", "Natalia", "12344"));
+		studentList.add(new Student("S02", "David", "658"));
+		studentList.add(new Student("S01", "Dima", "12344"));
+		studentList.add(new Student("S02", "Igor", "658"));
+		studentList.add(new Student("S01", "Andrey", "12344"));
+		studentList.add(new Student("S02", "Elena", "658"));
+		return studentList;
+
+	}
+
 
 
 }
